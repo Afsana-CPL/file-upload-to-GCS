@@ -8,7 +8,7 @@ function ShowAllFiles() {
   const [dataloaded, setDataloaded] = useState(false)
   const [files, setFiles] = useState(null)
   const fetchAllImages = async () => {
-    const response = await axios('http://localhost:5000/get-files-list', {
+    const response = await axios('https://file-upload-to-gcs-server-f51r8hi8x-afsana-cpl.vercel.app/get-files-list', {
       method: 'GET',
     })
     setDataloaded(true)
