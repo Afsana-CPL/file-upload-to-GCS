@@ -1,7 +1,5 @@
 import React, { useState, useLayoutEffect } from 'react'
-import { FiExternalLink } from 'react-icons/fi'
 import Loader from './Loader'
-import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Layout from './Layout'
 import axios from 'axios'
@@ -37,8 +35,9 @@ function ShowAllFiles() {
                     key={JSON.stringify(item)}
                   >
                     <a
-                      href={`${process.env.REACT_APP_IMAGE_URL_PREFIX}${item.name}`}
+                      href={`https://storage.cloud.google.com/shinonome-retail/${item.name}`}
                       target="_blank"
+                      rel="noreferrer"
                     >
                       {' '}
                       <div className="single-file-link">

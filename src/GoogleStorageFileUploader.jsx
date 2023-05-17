@@ -4,11 +4,12 @@ import Loader from './Loader'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Layout from './Layout'
+
 function GoogleStorageFileUploader() {
   const [url, setUrl] = useState('')
   const [file, setFile] = useState(null)
   const [dataloaded, setDataloaded] = useState(true)
-  const notify = (message) =>
+  const successNotify = (message) =>
     toast.success(message, {
       position: 'top-right',
       autoClose: 5000,
@@ -19,7 +20,17 @@ function GoogleStorageFileUploader() {
       progress: undefined,
       theme: 'colored',
     })
-
+  const errorNotify = (message) =>
+    toast.error(message, {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    })
   const handleSubmit = async (e) => {
     setDataloaded(false)
 
@@ -36,8 +47,12 @@ function GoogleStorageFileUploader() {
     const responseWithBody = await response.json()
     console.log(responseWithBody)
     setDataloaded(true)
-    if (response.status === 200) notify(responseWithBody.message)
-    if (response) setUrl(responseWithBody.url)
+    if (response.status === 200) {
+      successNotify(responseWithBody.message)
+      setUrl(responseWithBody.url)
+    } else {
+      errorNotify(responseWithBody.message)
+    }
   }
   const handleFileChange = (e) => {
     const img = {
@@ -64,7 +79,7 @@ function GoogleStorageFileUploader() {
             <div className="file-name">
               {file && file.data.name}
               {url && (
-                <a href={url} target="_blank">
+                <a href={url} target="_blank" rel="noreferrer">
                   <FiExternalLink />
                 </a>
               )}
