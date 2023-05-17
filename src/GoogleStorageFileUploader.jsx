@@ -38,7 +38,7 @@ function GoogleStorageFileUploader() {
     let formData = new FormData()
     formData.append('file', file.data)
     const response = await fetch(
-      'http://localhost:5000/upload-file-to-cloud-storage',
+      'https://file-upload-to-gcs-server-f51r8hi8x-afsana-cpl.vercel.app/upload-file-to-cloud-storage',
       {
         method: 'POST',
         body: formData,
